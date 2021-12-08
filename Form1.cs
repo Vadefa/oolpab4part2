@@ -19,7 +19,6 @@ namespace oolpab4part2
             InitializeComponent();
 
         }
-
         private void UpdateFromModel(object sender, EventArgs e)
         {
             textBox1.Text = model.getValueA().ToString();
@@ -47,19 +46,30 @@ namespace oolpab4part2
             private int valueC;
 
             public System.EventHandler observers;
-            public void setValueA(int value) {
-                if (value <= valueB)
-                    valueA = value;
-                else if (value <= valueC)
-                {
-                    valueA = value;
-                    valueB = value;
-                }
+
+            public bool valueCheck(int value)
+            {
+                if ((value >= 0) && (value <= 100))
+                    return true;
                 else
+                    return false;
+            }
+            public void setValueA(int value) {
+                if (valueCheck(value) == true)
                 {
-                    valueA = value;
-                    valueB = value;
-                    valueC = value;
+                    if (value <= valueB)
+                        valueA = value;
+                    else if (value <= valueC)
+                    {
+                        valueA = value;
+                        valueB = value;
+                    }
+                    else
+                    {
+                        valueA = value;
+                        valueB = value;
+                        valueC = value;
+                    }
                 }
                 observers.Invoke(this, null);
             }
@@ -69,21 +79,23 @@ namespace oolpab4part2
                 observers.Invoke(this, null);
             }
             public void setValueC(int value) {
-                if (value >= valueB)
-                    valueC = value;
-                else if (value >= valueA)
+                if (valueCheck(value) == true)
                 {
-                    valueC = value;
-                    valueB = value;
-                }
-                else
-                {
-                    valueC = value;
-                    valueB = value;
-                    valueA = value;
+                    if (value >= valueB)
+                        valueC = value;
+                    else if (value >= valueA)
+                    {
+                        valueC = value;
+                        valueB = value;
+                    }
+                    else
+                    {
+                        valueC = value;
+                        valueB = value;
+                        valueA = value;
+                    }
                 }
                 observers.Invoke(this, null);
-
             }
             public int getValueA() { return valueA; }
             public int getValueB() { return valueB; }
