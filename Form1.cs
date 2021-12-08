@@ -41,13 +41,13 @@ namespace oolpab4part2
 
         public class Model
         {
-            private int valueA;
-            private int valueB;
-            private int valueC;
+            private int valueA = Properties.Settings.Default.valueA;
+            private int valueB = Properties.Settings.Default.valueB;
+            private int valueC = Properties.Settings.Default.valueC;
 
             public System.EventHandler observers;
 
-            public bool valueCheck(int value)
+            public bool value_isCorrect(int value)
             {
                 if ((value >= 0) && (value <= 100))
                     return true;
@@ -55,7 +55,7 @@ namespace oolpab4part2
                     return false;
             }
             public void setValueA(int value) {
-                if (valueCheck(value) == true)
+                if (value_isCorrect(value))
                 {
                     if (value <= valueB)
                         valueA = value;
@@ -79,7 +79,7 @@ namespace oolpab4part2
                 observers.Invoke(this, null);
             }
             public void setValueC(int value) {
-                if (valueCheck(value) == true)
+                if (value_isCorrect(value))
                 {
                     if (value >= valueB)
                         valueC = value;
@@ -101,21 +101,11 @@ namespace oolpab4part2
             public int getValueB() { return valueB; }
             public int getValueC() { return valueC; }
 
-            public Model(int valueA, int valueB, int valueC)
-            {
-                this.valueA = valueA;
-                this.valueB = valueB;
-                this.valueC = valueC;
-            }
 
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            int valA = Properties.Settings.Default.valueA;
-            int valB = Properties.Settings.Default.valueB;
-            int valC = Properties.Settings.Default.valueC;
-
-            model = new Model(valA, valB, valC);
+            model = new Model();
             model.observers += new EventHandler(UpdateFromModel);
             model.observers.Invoke(this, null);
         }
