@@ -18,10 +18,7 @@ namespace oolpab4part2
         {
             InitializeComponent();
 
-            model = new Model();
-            model.observers += new EventHandler(UpdateFromModel);
         }
-
 
         private void UpdateFromModel(object sender, EventArgs e)
         {
@@ -42,7 +39,14 @@ namespace oolpab4part2
             textBox2.Text.StartsWith(model.getValueB().ToString());
             textBox3.Text.StartsWith(model.getValueC().ToString());
         }
-       
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.valueA = model.getValueA();
+            Properties.Settings.Default.valueB = model.getValueB();
+            Properties.Settings.Default.valueC = model.getValueC();
+            Properties.Settings.Default.Save();
+        }
+
         public class Model
         {
             private int valueA;
@@ -92,6 +96,23 @@ namespace oolpab4part2
             public int getValueB() { return valueB; }
             public int getValueC() { return valueC; }
 
+            public Model(int valueA, int valueB, int valueC)
+            {
+                this.valueA = valueA;
+                this.valueB = valueB;
+                this.valueC = valueC;
+            }
+
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int valA = Properties.Settings.Default.valueA;
+            int valB = Properties.Settings.Default.valueB;
+            int valC = Properties.Settings.Default.valueC;
+
+            model = new Model(valA, valB, valC);
+            model.observers += new EventHandler(UpdateFromModel);
+            model.observers.Invoke(this, null);
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
@@ -138,8 +159,5 @@ namespace oolpab4part2
             model.setValueC(trackBar3.Value);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
     }
 }
