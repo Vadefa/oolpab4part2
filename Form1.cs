@@ -18,6 +18,10 @@ namespace oolpab4part2
         {
             InitializeComponent();
 
+            model = new Model();
+            model.observers += new EventHandler(UpdateFromModel);
+            model.observers.Invoke(this, null);
+
         }
         private void UpdateFromModel(object sender, EventArgs e)
         {
@@ -38,18 +42,13 @@ namespace oolpab4part2
             textBox2.Text.StartsWith(model.getValueB().ToString());
             textBox3.Text.StartsWith(model.getValueC().ToString());
 
-
-            Properties.Settings.Default.valueA = model.getValueA();
-            Properties.Settings.Default.valueB = model.getValueB();
-            Properties.Settings.Default.valueC = model.getValueC();
-            Properties.Settings.Default.Save();
         }
 
         public class Model
         {
-            private int valueA = Properties.Settings.Default.valueA;
-            private int valueB = Properties.Settings.Default.valueB;
-            private int valueC = Properties.Settings.Default.valueC;
+            private int valueA;
+            private int valueB;
+            private int valueC;
 
             public System.EventHandler observers;
 
@@ -107,22 +106,21 @@ namespace oolpab4part2
             public int getValueB() { return valueB; }
             public int getValueC() { return valueC; }
 
+            public Model()
+            {
+            valueA = Properties.Settings.Default.valueA;
+            valueB = Properties.Settings.Default.valueB;
+            valueC = Properties.Settings.Default.valueC;
+            }
+            ~Model()
+            {
+                Properties.Settings.Default.valueA = valueA;
+                Properties.Settings.Default.valueB = valueB;
+                Properties.Settings.Default.valueC = valueC;
+                Properties.Settings.Default.Save();
 
+            }
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            model = new Model();
-            model.observers += new EventHandler(UpdateFromModel);
-            model.observers.Invoke(this, null);
-        }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        //    Properties.Settings.Default.valueA = model.getValueA();
-        //    Properties.Settings.Default.valueB = model.getValueB();
-        //    Properties.Settings.Default.valueC = model.getValueC();
-        //    Properties.Settings.Default.Save();
-        }
-
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
