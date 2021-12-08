@@ -37,6 +37,12 @@ namespace oolpab4part2
             textBox1.Text.StartsWith(model.getValueA().ToString());
             textBox2.Text.StartsWith(model.getValueB().ToString());
             textBox3.Text.StartsWith(model.getValueC().ToString());
+
+
+            Properties.Settings.Default.valueA = model.getValueA();
+            Properties.Settings.Default.valueB = model.getValueB();
+            Properties.Settings.Default.valueC = model.getValueC();
+            Properties.Settings.Default.Save();
         }
 
         public class Model
@@ -111,10 +117,10 @@ namespace oolpab4part2
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.valueA = model.getValueA();
-            Properties.Settings.Default.valueB = model.getValueB();
-            Properties.Settings.Default.valueC = model.getValueC();
-            Properties.Settings.Default.Save();
+        //    Properties.Settings.Default.valueA = model.getValueA();
+        //    Properties.Settings.Default.valueB = model.getValueB();
+        //    Properties.Settings.Default.valueC = model.getValueC();
+        //    Properties.Settings.Default.Save();
         }
 
 
