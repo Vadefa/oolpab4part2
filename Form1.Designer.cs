@@ -104,6 +104,16 @@ namespace oolpab4part2
             // numericUpDown2
             // 
             this.numericUpDown2.Location = new System.Drawing.Point(318, 188);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(125, 27);
             this.numericUpDown2.TabIndex = 1;
@@ -130,7 +140,8 @@ namespace oolpab4part2
             // trackBar2
             // 
             this.trackBar2.Location = new System.Drawing.Point(318, 237);
-            this.trackBar2.Maximum = 100;
+            this.trackBar2.Maximum = 200;
+            this.trackBar2.Minimum = -100;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(125, 56);
             this.trackBar2.TabIndex = 4;
@@ -218,6 +229,7 @@ namespace oolpab4part2
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();

@@ -36,7 +36,13 @@ namespace oolpab4part2
             textBox3.Text = model.getValueC().ToString();
             numericUpDown3.Value = model.getValueC();
             trackBar3.Value = model.getValueC();
+
+
+            textBox1.Text.StartsWith(model.getValueA().ToString());
+            textBox2.Text.StartsWith(model.getValueB().ToString());
+            textBox3.Text.StartsWith(model.getValueC().ToString());
         }
+       
         public class Model
         {
             private int valueA;
@@ -44,7 +50,6 @@ namespace oolpab4part2
             private int valueC;
 
             public System.EventHandler observers;
-
             public void setValueA(int value) {
                 if (value <= valueB)
                     valueA = value;
@@ -81,15 +86,18 @@ namespace oolpab4part2
                     valueA = value;
                 }
                 observers.Invoke(this, null);
+
             }
             public int getValueA() { return valueA; }
             public int getValueB() { return valueB; }
             public int getValueC() { return valueC; }
+
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             model.setValueA((int)numericUpDown1.Value);
+
         }
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
@@ -128,6 +136,10 @@ namespace oolpab4part2
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             model.setValueC(trackBar3.Value);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
     }
 }
